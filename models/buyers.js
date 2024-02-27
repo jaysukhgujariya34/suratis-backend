@@ -11,6 +11,10 @@ const BuyersSchema = Schema({
     type: String,
     require: true,
   },
+  prefix: {
+    type: String,
+    require: true,
+  },
   contectNomber: {
     type: String,
     require: true,
@@ -19,7 +23,7 @@ const BuyersSchema = Schema({
     type: String,
     require: true,
   },
-  categort: {
+  category: {
     type: String,
     require: true,
   },
@@ -43,7 +47,7 @@ const BuyersSchema = Schema({
     type: Date,
     default: Date.now,
     required: true,
-  }
+  },
 });
 
 export default mongoose.model("Buyers", BuyersSchema);

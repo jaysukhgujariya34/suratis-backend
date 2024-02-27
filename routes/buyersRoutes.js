@@ -4,7 +4,7 @@ import { AddBuyers, AllBuyers, oneBuyers } from "../controllers/buyerscontroller
 
 const router = Router();
 
-router.get("/",passport.authenticate("jwt", { session: false }),async (req, res) => {
+router.get("/",async (req, res) => {
     try {
       const buyers = await AllBuyers(req.query);
       res.send(buyers);
@@ -18,6 +18,9 @@ router.get("/",passport.authenticate("jwt", { session: false }),async (req, res)
 router.get("/:id",passport.authenticate("jwt", { session: false }),async (req, res) => {
     try {
       const buyers = await oneBuyers(req.query);
+        if (!buyers) {
+          return res.send({ message: "Not Found" });
+        }
       res.send(buyers);
     } catch (error) {
       console.log(error);
