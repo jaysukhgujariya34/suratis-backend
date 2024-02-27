@@ -30,6 +30,7 @@ router.get("/:id",passport.authenticate("jwt", { session: false }),async (req, r
 );
 
 router.post("/", async (req, res) => {
+  console.log("buyers add data",req.body);
     try {
       const buyers = await AddBuyers(req.body);
       res.send(buyers);
