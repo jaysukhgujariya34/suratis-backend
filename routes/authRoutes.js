@@ -12,8 +12,6 @@ const router = express.Router();
 router.post("/signup", async (req, res) => {
   const reqUser = req.body;
 
-  console.log("req.body", req.body);
-
   // Validation
   const { errors, isValid } = validateSignup(reqUser);
 
