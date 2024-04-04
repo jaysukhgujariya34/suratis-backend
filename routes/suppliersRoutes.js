@@ -6,13 +6,13 @@ import {
   oneBuyers,
 } from "../controllers/buyerscontroller";
 import { AddSuppliers, AllSuppliers, oneSuppliers } from "../controllers/suppliersController";
+import multer from "multer";
 
 const router = Router();
 
-router.get(
-  "/",
-  passport.authenticate("jwt", { session: false }),
-  async (req, res) => {
+const upload = multer({ dest: "uploads/" });
+
+router.get("/",async (req, res) => {
     try {
       const suppliers = await AllSuppliers(req.query);
       res.send(suppliers);
@@ -23,10 +23,7 @@ router.get(
   }
 );
 
-router.get(
-  "/:id",
-  passport.authenticate("jwt", { session: false }),
-  async (req, res) => {
+router.get( "/:id",async (req, res) => {
     try {
       const suppliers = await oneSuppliers(req.query);
       res.send(suppliers);
@@ -37,7 +34,8 @@ router.get(
   }
 );
 
-router.post("/", async (req, res) => {
+router.post("/", upload.array("images"), async (req, res) => {
+  console.log(req.body)
   try {
     const suppliers = await AddSuppliers(req.body);
     res.send(suppliers);
